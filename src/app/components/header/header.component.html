@@ -1,0 +1,28 @@
+<div class="bp-header">
+  <div class="bp-header__row">
+    <div class="bp-header__menu-btn">
+      <fa name="bars" size="2x"></fa>
+    </div>
+    <div class="bp-header__title">
+      Лучшая цена
+    </div>
+    <div class="bp-header__search-btn">
+      <fa name="search" size="2x"></fa>
+    </div>
+  </div>
+
+  <div class="bp-header__row"></div>
+
+  <div class="bp-header__multi-button" (click)="onQrCodeButtonClick()">
+      <div class="bp-header__multi-button-item">
+        <fa name="plus"></fa>
+        Добавить покупки
+      </div>
+    <div class="bp-header__multi-button-item">
+      <fa name="qrcode"></fa>
+
+      <bp-qr-code-reader style="display: none;"></bp-qr-code-reader>
+
+    </div>
+  </div>
+</div>

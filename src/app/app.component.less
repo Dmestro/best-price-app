@@ -1,0 +1,34 @@
+@import "../styles";
+
+.app {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background-color: white;
+
+  &__content{
+    margin-top: 45%;
+    overflow-y: scroll;
+    display: flex;
+    flex-direction: column;
+
+    .item{
+      &:first-child{
+        margin-top: 30px;
+      }
+
+      //border: 1px solid darkgreen;
+      height: 50px;
+      margin: 5px;
+      //background-color: gray;
+      box-shadow: @material-shadow;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+    }
+  }
+}
+
+

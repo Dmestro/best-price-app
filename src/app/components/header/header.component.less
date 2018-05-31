@@ -1,0 +1,77 @@
+@import "../../../styles";
+.bp-header{
+  width: 100%;
+  height: 20%;
+  background-color: @primary-light;
+  box-shadow: @material-shadow;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  position: fixed;
+  z-index: 2;
+
+  &__row{
+    display: flex;
+    flex-direction: row;
+    padding: 20px;
+    align-items: center;
+  }
+
+  &__title{
+    white-space: nowrap;
+    width: 100%;
+    text-align: center;
+    align-items: center;
+    vertical-align: center;
+
+  }
+
+  &__menu-btn{
+    float: left;
+  }
+
+  &__search-btn{
+    float: right;
+  }
+
+  &__multi-button{
+    width: 80%;
+    height: 50px;
+    background-color: @accent-color;
+    display: flex;
+    border-radius: 34px;
+    align-self: center;
+    position: absolute;
+    bottom: -22px;
+    box-shadow: @material-shadow;
+    display: flex;
+    flex-direction: row;
+
+
+    &-item{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      &:first-child{
+        fa {
+          padding-right: 23px;
+        }
+        white-space: nowrap;
+        padding-left: 20px;
+        padding-right: 20px;
+        width: 60%;
+        border-right: 1px solid #0288d17d;
+      }
+      &:last-child{
+        font-size: 37px;
+        margin: auto auto;
+        padding-right: 5px;
+        padding-top: 4px;
+      }
+    }
+  }
+
+
+
+
+}
