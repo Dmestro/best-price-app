@@ -1,0 +1,6 @@
+{
+  "projects": {
+    "staging": "angular-qr-code-test",
+    "release": "best-price-app"
+  }
+}
