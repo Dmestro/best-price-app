@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
   selector: 'bp-action-button',
@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./action-button.component.less']
 })
 export class ActionButtonComponent implements OnInit {
+  @Input()
+  public text = '';
 
   constructor() { }
 

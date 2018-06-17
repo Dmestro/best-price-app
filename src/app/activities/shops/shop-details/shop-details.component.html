@@ -1,0 +1,22 @@
+<div class="bp-shop-details">
+ <div class="bp-shop-details__title">Магазин</div>
+ <div class="bp-shop-details__item">{{shop.name}}</div>
+ <div class="bp-shop-details__item">{{shop.description}}</div>
+
+  <div class="bp-shop-details__map">
+    <div class="bp-shop-details__map-title">Расположение:</div>
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13" (mapClick)="_addMarker($event)">
+      <agm-marker *ngIf="shop.coords.lat && shop.coords.lon"
+                  [(latitude)]="shop.coords.lat"
+                  [(longitude)]="shop.coords.lon"
+                  [markerDraggable]="true"
+      ></agm-marker>
+    </agm-map>
+  </div>
+
+  <div class="bp-shop-details__toolbar">
+    <bp-button [text]="'Редактировать'" (click)="_onChange()"></bp-button>
+    <bp-button [text]="'Назад'" (click)="_onCancel()"></bp-button>
+  </div>
+
+</div>

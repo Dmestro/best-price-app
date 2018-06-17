@@ -9,6 +9,7 @@ export class HeaderComponent implements OnInit {
   public _title = 'Магазины';
 
   public _routes: any[] = [
+    {title: 'Покупки', link: '/vauchers'},
     {title: 'Магазины', link: '/shops'},
     {title: 'Чеки', link: '/receipts'},
     {title: 'О программе', link: '/about'},

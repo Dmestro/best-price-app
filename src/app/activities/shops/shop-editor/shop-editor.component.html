@@ -1,0 +1,36 @@
+<div class="bp-shop-editor">
+  <div class="bp-shop-editor__title">
+    {{title}}
+  </div>
+  <bp-field [title]="'Название'"
+            [placeholder]="'Введите название магазина'"
+            [model]="shop.name"
+            (updateModel)="shop.name = $event"
+  >
+  </bp-field>
+
+  <bp-field [title]="'Описание'"
+            [placeholder]="'Введите описание магазина'"
+            [(model)]="shop.description"
+            [model]="shop.description"
+            (updateModel)="shop.description = $event">
+  </bp-field>
+
+
+  <div class="bp-shop-editor__map">
+    <div class="bp-shop-editor__map-title">Расположение:</div>
+    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="13" (mapClick)="_addMarker($event)">
+      <agm-marker *ngIf="shop.coords.lat && shop.coords.lon"
+                  [(latitude)]="shop.coords.lat"
+                  [(longitude)]="shop.coords.lon"
+                  [markerDraggable]="true"
+      ></agm-marker>
+    </agm-map>
+  </div>
+
+  <div class="bp-shop-editor__toolbar">
+    <bp-button [text]="actionTitle" (click)="_onSave()"></bp-button>
+    <bp-button [text]="'Отмена'" (click)="_onCancel()"></bp-button>
+  </div>
+
+</div>

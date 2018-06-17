@@ -1,6 +1,6 @@
 <div class="bp-shops">
   <div *ngFor="let shop of _shops"
-    class="bp-shop">
+    class="bp-shop" routerLink="/shop-details/{{shop.id}}">
     <div class="bp-shop__icon">
 
     </div>
@@ -12,4 +12,6 @@
   </div>
 </div>
 
-<bp-action-button></bp-action-button>
+<bp-action-button [text]="'Добавить магазин'" routerLink="/create-shop">
+
+</bp-action-button>

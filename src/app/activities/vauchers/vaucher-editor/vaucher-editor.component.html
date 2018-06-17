@@ -1,0 +1,38 @@
+<div class="bp-vaucer-editor">
+  <div class="bp-vaucer-editor__title">
+    {{title}}
+  </div>
+
+  <div class="bp-vaucer-editor__shop">
+    <div class="bp-vaucer-editor__add-shop"
+         *ngIf="!selectedShop.id"
+         (click)="_onShopDialogOpen()">
+      + Выбрать магазин
+    </div>
+
+    <div class="bp-vaucer-editor__shop-name" *ngIf="selectedShop.id">
+      Магазин: {{selectedShop.name}}
+    </div>
+  </div>
+</div>
+
+
+<div class="bp-vaucer-editor__shop-list-wrapper" *ngIf="isShopListOpen">
+
+</div>
+<div class="bp-vaucer-editor__shop-list" *ngIf="isShopListOpen">
+  <div class="bp-vaucer-editor__shop-list-header">
+    Выберите магазин
+    <div class="bp-vaucer-editor__shop-list-header-close" (click)="isShopListOpen = false"></div>
+  </div>
+  <div class="bp-vaucer-editor__shop-list-content">
+
+    <div class="bp-vaucer-editor__shop-list-content-item"
+         *ngFor="let shop of shops"
+    (click)="_onShopSelected(shop)" [ngClass]="{'_selected': shop.id === selectedShop.id}">{{shop.name}}</div>
+
+  </div>
+  <div class="bp-vaucer-editor__shop-list-action" (click)="isShopListOpen = false" >
+    OK
+  </div>
+</div>

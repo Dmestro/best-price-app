@@ -1,0 +1,10 @@
+<fieldset class="material">
+  <input type="text"
+         placeholder="{{placeholder}}"
+         autocomplete="off"
+         [ngModel]="model"
+         (ngModelChange)="_onModelChange($event)"
+         required>
+  <hr>
+  <label>{{title}}</label>
+</fieldset>
