@@ -15,6 +15,9 @@ import {FormsModule} from '@angular/forms';
 import { ShopDetailsComponent } from './activities/shops/shop-details/shop-details.component';
 import { VaucehrsComponent } from './activities/vauchers/vaucehrs/vaucehrs.component';
 import { VaucherEditorComponent } from './activities/vauchers/vaucher-editor/vaucher-editor.component';
+import {QrCodeReaderComponent} from './common/components/qr-code-reader/qr-code-reader.component';
+import {QrCodeReader} from './common/components/qr-code-reader/qr-code-reader.service';
+import {HttpClientJsonpModule, HttpClientModule} from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: 'shops', component: ShopsComponent},
@@ -23,6 +26,7 @@ const appRoutes: Routes = [
   {path: 'shop-details/:id', component: ShopDetailsComponent},
   { path: 'vauchers', component: VaucehrsComponent},
   { path: 'create-vaucher', component: VaucherEditorComponent},
+  {path: 'change-vaucher/:id', component: VaucherEditorComponent},
 
   { path: '', redirectTo: 'shops', pathMatch: 'full'}
 
@@ -39,9 +43,12 @@ const appRoutes: Routes = [
     ShopEditorComponent,
     ShopDetailsComponent,
     VaucehrsComponent,
+    QrCodeReaderComponent,
     VaucherEditorComponent
   ],
   imports: [
+    HttpClientModule,
+    HttpClientJsonpModule,
     BrowserModule,
     ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     RouterModule.forRoot(appRoutes),
@@ -50,7 +57,7 @@ const appRoutes: Routes = [
       apiKey: 'AIzaSyCT7B1pqdA7JVx8hm4VlNDHIVUqZes8G_k'
     }),
   ],
-  providers: [],
+  providers: [QrCodeReader],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

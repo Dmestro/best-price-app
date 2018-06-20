@@ -1,38 +1,174 @@
 <div class="bp-vaucer-editor">
   <div class="bp-vaucer-editor__title">
     {{title}}
+    <div class="bp-vaucer-editor__qr" (click)="onQrCodeButtonClick()"></div>
+
+  </div>
+
+  <div class="bp-vaucer-editor__date">
+    <bp-field [title]="'Дата покупки'"
+              [placeholder]="'DD/MM/YYYY'"
+              [model]="vaucher.date"
+              (updateModel)="vaucher.date = $event">
+    </bp-field>
   </div>
 
   <div class="bp-vaucer-editor__shop">
     <div class="bp-vaucer-editor__add-shop"
-         *ngIf="!selectedShop.id"
+         *ngIf="!vaucher.shop.id || !vaucher.shop.name"
          (click)="_onShopDialogOpen()">
       + Выбрать магазин
     </div>
 
-    <div class="bp-vaucer-editor__shop-name" *ngIf="selectedShop.id">
-      Магазин: {{selectedShop.name}}
+    <div class="bp-vaucer-editor__shop-info" *ngIf="vaucher.shop.id || vaucher.shop.name">
+      <div class="bp-vaucer-editor__shop-icon icon-shop {{vaucher.shop.icon}}"></div>
+      <div class="bp-vaucer-editor__shop-name">{{vaucher.shop.name}}</div>
+      <div class="bp-vaucer-editor__shop-change" (click)="isShopListOpen = true"></div>
+    </div>
+  </div>
+
+  <div class="bp-vaucer-editor__offers">
+    <div class="bp-vaucer-editor__offers-header">Товары</div>
+    <div class="bp-vaucer-editor__offers-content">
+      <div class="bp-vaucer-editor__offer" *ngFor="let product of vaucher.products; let i=index">
+        <div class="bp-vaucer-editor__offer-name">{{i+1}}. {{product.name}}</div>
+        <div class="bp-vaucer-editor__offer-price">{{product.count}}x{{product.price}} p.</div>
+        <div class="bp-vaucer-editor__offer-actions">
+          <div class="bp-vaucer-editor__offer-actions-edit" (click)="_onEditShop(product)"></div>
+          <div class="bp-vaucer-editor__offer-actions-remove" (click)="_onRemoveProduct(product)"></div>
+        </div>
+      </div>
+    </div>
+    <div class="bp-vaucer-editor__add-shop" (click)="_isAddProductDialogOpen = true;">
+      + Добавить товар
+    </div>
+  </div>
+  <div class="bp-vaucer-editor__toolbar">
+    <div class="bp-vaucer-editor__toolbar-info">
+
+      <div class="bp-vaucer-editor__toolbar-info-count">Количество: {{vaucher.products.length}}</div>
+      <div class="bp-vaucer-editor__toolbar-info-total" *ngIf="vaucher.products.length!==0">Итог: {{_getTotalPrice() | number}}р.</div>
+
+    </div>
+    <div class="bp-vaucer-editor__toolbar-actions">
+      <div class="bp-vaucer-editor__toolbar-action _ok" (click)="_onSave()">ОК</div>
+      <div class="bp-vaucer-editor__toolbar-action _cancel" (click)="_onCancel()">Отмена</div>
     </div>
   </div>
 </div>
 
 
-<div class="bp-vaucer-editor__shop-list-wrapper" *ngIf="isShopListOpen">
+<div class="bp-vaucer-editor__shop-list-wrapper" *ngIf="isShopListOpen || _isAddProductDialogOpen || _isEditProductDialogOpen">
 
 </div>
 <div class="bp-vaucer-editor__shop-list" *ngIf="isShopListOpen">
   <div class="bp-vaucer-editor__shop-list-header">
     Выберите магазин
-    <div class="bp-vaucer-editor__shop-list-header-close" (click)="isShopListOpen = false"></div>
+    <div class="bp-vaucer-editor__shop-list-header-close" (click)="_onShopDialogClose()"></div>
   </div>
   <div class="bp-vaucer-editor__shop-list-content">
 
     <div class="bp-vaucer-editor__shop-list-content-item"
          *ngFor="let shop of shops"
-    (click)="_onShopSelected(shop)" [ngClass]="{'_selected': shop.id === selectedShop.id}">{{shop.name}}</div>
+         (click)="_onShopSelected(shop)" [ngClass]="{'_selected': shop.id === vaucher.shop.id}">
+      <div class="icon-shop {{shop.icon}}"></div>
+      {{shop.name}}
+    </div>
 
   </div>
   <div class="bp-vaucer-editor__shop-list-action" (click)="isShopListOpen = false" >
     OK
   </div>
 </div>
+
+
+<div class="bp-vaucer-editor__shop-list" *ngIf="_isAddProductDialogOpen">
+  <div class="bp-vaucer-editor__shop-list-header">
+    Добавить товар
+    <div class="bp-vaucer-editor__shop-list-header-close" (click)="_onCancelProductAdding()"></div>
+  </div>
+  <div class="bp-vaucer-editor__shop-list-content">
+    <bp-field [title]="'Название'"
+              [placeholder]="'Введите название товара'"
+              [model]="addedProduct.name"
+              (updateModel)="addedProduct.name = $event">
+    </bp-field>
+    <bp-field [title]="'Вес (кг)'"
+              [placeholder]="'Введите вес товара'"
+              [model]="addedProduct.weight"
+              (updateModel)="addedProduct.weight = $event">
+    </bp-field>
+    <bp-field [title]="'Количество'"
+              [placeholder]="'Введите количество товара'"
+              [(model)]="addedProduct.count"
+              [model]="addedProduct.count"
+              (updateModel)="addedProduct.count = $event">
+    </bp-field>
+    <bp-field [title]="'Цена (р.)'"
+              [placeholder]="'Введите цену товара'"
+              [(model)]="addedProduct.price"
+              [model]="addedProduct.price"
+              (updateModel)="addedProduct.price = $event">
+    </bp-field>
+
+    <div class="bp-vaucer-editor__photo">
+      <img src="{{addedProduct.photo}}" alt="">
+    </div>
+    <input type='file' accept="image/*" id="imgInp" style="visibility: hidden"/>
+
+    <div class="bp-vaucer-editor__add-photo" (click)="_onSelectPhoto()">+ Добавить фото</div>
+  </div>
+  <div class="bp-vaucer-editor__shop-list-action" (click)="_onAddProduct()" >
+    OK
+  </div>
+</div>
+
+
+<div class="bp-vaucer-editor__shop-list" *ngIf="_isEditProductDialogOpen">
+  <div class="bp-vaucer-editor__shop-list-header">
+    Редактировать товар
+    <div class="bp-vaucer-editor__shop-list-header-close" (click)="_isEditProductDialogOpen = false"></div>
+  </div>
+  <div class="bp-vaucer-editor__shop-list-content">
+    <bp-field [title]="'Название'"
+              [placeholder]="'Введите название товара'"
+              [model]="editedProduct.name"
+              (updateModel)="editedProduct.name = $event">
+    </bp-field>
+    <bp-field [title]="'Вес (кг)'"
+              [placeholder]="'Введите вес товара'"
+              [model]="editedProduct.weight"
+              (updateModel)="editedProduct.weight = $event">
+    </bp-field>
+    <bp-field [title]="'Количество'"
+              [placeholder]="'Введите количество товара'"
+              [(model)]="editedProduct.count"
+              [model]="editedProduct.count"
+              (updateModel)="editedProduct.count = $event">
+    </bp-field>
+    <bp-field [title]="'Цена (р.)'"
+              [placeholder]="'Введите цену товара'"
+              [(model)]="editedProduct.price"
+              [model]="editedProduct.price"
+              (updateModel)="editedProduct.price = $event">
+    </bp-field>
+
+    <div class="bp-vaucer-editor__photo">
+      <img src="{{editedProduct.photo}}" alt="">
+    </div>
+    <input type='file' accept="image/*" id="imgInp" style="visibility: hidden"/>
+
+
+    <div class="bp-vaucer-editor__add-photo" (click)="_onEditPhoto()">Изменить фото</div>
+
+  </div>
+  <div class="bp-vaucer-editor__shop-list-action" (click)="_isEditProductDialogOpen = false" >
+    OK
+  </div>
+</div>
+
+
+
+<bp-qr-code-reader style="display: none" (onResponse)="_onVaucherRecognized($event)"></bp-qr-code-reader>
+
+

@@ -1,7 +1,13 @@
 <div class="bp-shop-details">
+
  <div class="bp-shop-details__title">Магазин</div>
- <div class="bp-shop-details__item">{{shop.name}}</div>
+
+ <div class="bp-shop-details__item">
+   <div class="bp-shop-details__icon icon-shop {{shop.icon}}">
+
+   </div>{{shop.name}}</div>
  <div class="bp-shop-details__item">{{shop.description}}</div>
+
 
   <div class="bp-shop-details__map">
     <div class="bp-shop-details__map-title">Расположение:</div>
@@ -14,9 +20,12 @@
     </agm-map>
   </div>
 
+
   <div class="bp-shop-details__toolbar">
-    <bp-button [text]="'Редактировать'" (click)="_onChange()"></bp-button>
-    <bp-button [text]="'Назад'" (click)="_onCancel()"></bp-button>
+    <div class="bp-shop-details__toolbar-actions">
+      <div class="bp-shop-details__toolbar-action _ok" (click)="_onChange()">Редактировать</div>
+      <div class="bp-shop-details__toolbar-action _cancel" (click)="_onCancel()">Отмена</div>
+    </div>
   </div>
 
 </div>

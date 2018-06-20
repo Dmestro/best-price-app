@@ -1,0 +1,58 @@
+@import "../../../../styles";
+
+.bp-vauchers{
+  width: 100%;
+}
+
+.bp-vaucher {
+  background-color: white;
+  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  padding: 10px;
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px;
+
+  &__shop-name{
+    width: 50%
+  }
+
+  &__price {
+    font-weight: bold;
+    float: left;
+    width: 20%;
+    text-align: left;
+  }
+
+  &__date {
+    float: right;
+  }
+
+  &__remove {
+    width: 24px;
+    height: 24px;
+    background-size: 100%;
+    background-repeat: no-repeat;
+    margin: 5px;
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAAAtElEQVR4Ae3UwU2GQBSF0bvDZggt0gMYqeaPVWDsBDdgC5rMm8zifK+BexKGSJIkqUlrnj/eOv78CkL9/FJC/fzRCU/nax4AAAAAgKTxH/NAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAn9L5V8r7LgWcKe+jFLClvCV32fw7czp0lAH2dOktnyXzX5mSXoSj8Yd0Z8+Uri15z1euBj/OM1vm/DtJkiT9AqdFeHo8uOJKAAAAAElFTkSuQmCC');
+    display: block;
+    float: right;
+    justify-self: flex-end;
+    cursor: pointer;
+    opacity: 0.6;
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+
+
+  &__description {
+    font-size: 10pt;
+    color: @secondaryTextColor;
+  }
+
+
+}

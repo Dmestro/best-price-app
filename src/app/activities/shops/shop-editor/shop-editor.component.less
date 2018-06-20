@@ -5,11 +5,22 @@
 
   background-color: @textPrimaryColor;
   margin: 5px;
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  //box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
   padding: 10px;
 
-  bp-field{
-    margin-top: 15px;
+
+  &__icon{
+    &-selected{
+      padding:5px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &-change{
+      color: @accentColor;
+    }
   }
 
   &__title {
@@ -18,6 +29,16 @@
     font-weight: bold;
     border-bottom: 1px solid @dividerColor;
     padding-bottom: 10px;
+  }
+
+  &__add-icon{
+    padding: 0px;
+    text-align: center;
+    width: 100%;
+    vertical-align: center;
+    padding-top: 20px;
+    padding-bottom: 12px;
+    color: @accentColor;
   }
 
   &__map {
@@ -49,4 +70,139 @@
     }
   }
 
+  &__dialog-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    background-color: #212121;
+    opacity: 0.4;
+  }
+
+  &__icon-list{
+    display: flex;
+    flex-direction: column;
+    margin-left: 21%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    z-index: 9;
+
+    width: 300px;
+    height: 500px;
+
+    border-radius: 15px;
+
+    opacity: 1;
+
+    background-color: @textPrimaryColor;
+
+    &-item {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+
+      &._selected{
+        background-color: @accentColor;
+      }
+
+      &-title {
+        padding-left: 20px;
+      }
+      padding: 5px;
+      padding: 5px;
+      border-bottom: 1px solid @dividerColor;
+    }
+
+    &-content{
+      width: 100%;
+      height: 400px;
+      overflow-y: scroll;
+      &-item{
+        width: 260px;
+        border-bottom: 1px solid @dividerColor;
+        padding: 20px;
+      }
+    }
+
+    &-action{
+      padding: 0px;
+      text-align: center;
+      width: 300px;
+      vertical-align: center;
+      padding-top: 20px;
+      padding-bottom: 12px;
+      color: @accentColor;
+    }
+
+    &-header{
+      display: flex;
+      flex-direction: row;
+      padding: 10px;
+      border-bottom: 1px solid @dividerColor;
+      justify-content: space-evenly;
+      align-items: center;
+      font-weight: bold;
+
+      &-close{
+        margin-left: 90px;
+        width: 30px;
+        height: 30px;
+        background-size: 100%;
+        background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAQAAABIkb+zAAABQElEQVR4Ae3a3WkCURRF4d2AppyrnTsNaMpRG5ggebgPYSAPfgMhe90G1ppfOJyUUkoppZRSSinll3xkyYjgnEsOXv8za+4ZQP+ZNdccvf76nQD0X+eWI9afCUB/Jkj9mQD0WcKS9cd5ZAD911nydkYeIGHqg3sLEoA+SBD6PoHr+wSt7xNOQB9x2krg+j6B6/sEru8TtL5POAN9xHkrgev7BK7vE7i+T+D6PgHoGzZEn1jfJwB9m8D1fQLX9wle3yd4/Qb4R6gvsf+M9kfm9e9gILmr/siQCV7/hUzw+jTB69MEr88SvD6Yqe6pDwaSe+vTBK9PE7w+S/D6YKa6pz4YSO6tTxO8Pk3w+jTB6/+FhMuGvrkwl7ydY267rdtcc0h0Alp4mvo2Aa2cTX2XoJf+Dv9i7bKUUkoppZRSSilfvlEwaH0mtuUAAAAASUVORK5CYII=');
+        float: right;
+      }
+  }
+
+} }
+
+@media (max-width: 48em) {
+  .bp-shop-editor {
+    &__toolbar{
+      box-shadow: 1px 0px 20px -6px rgba(0, 0, 0, 0.6), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      width: 100%;
+      height: 80px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: white;
+
+      &-actions {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+      &-action {
+        width: 35%;
+        padding: 12px;
+        justify-content: center;
+
+        border-radius: 25px;
+        color: white;
+        display: flex;
+        div {
+          max-width: 300px;
+        }
+
+        box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+        &._ok{
+          background-color: @accentColor;
+        }
+        &._cancel{
+          background-color: @secondaryTextColor;
+        }
+      }
+    }
+  }
 }

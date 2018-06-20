@@ -6,7 +6,7 @@
 
   background-color: @textPrimaryColor;
   margin: 5px;
-  box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+  //box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
   padding: 10px;
 
   &__title {
@@ -20,6 +20,10 @@
   &__item {
     font-size:  12pt;
     padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
   }
 
   &__map {
@@ -51,3 +55,58 @@
     }
   }
 }
+
+@media (max-width: 48em) {
+  .bp-shop-details {
+    &__toolbar{
+      box-shadow: 1px 0px 20px -6px rgba(0, 0, 0, 0.6), 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      width: 100%;
+      height: 80px;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: white;
+
+      &-actions {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+      }
+
+      &-action {
+        width: 35%;
+        padding: 12px;
+        justify-content: center;
+
+        border-radius: 25px;
+        color: white;
+        display: flex;
+        div {
+          max-width: 300px;
+        }
+
+        box-shadow: 0 3px 1px -2px rgba(0, 0, 0, .2), 0 2px 2px 0 rgba(0, 0, 0, .14), 0 1px 5px 0 rgba(0, 0, 0, .12);
+        &._ok{
+          background-color: @accentColor;
+        }
+        &._cancel{
+          background-color: @secondaryTextColor;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 48em) {
+  .bp-shop-details{
+    height: 100vh;
+  }
+
+
+}
+

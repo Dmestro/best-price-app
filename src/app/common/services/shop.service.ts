@@ -39,4 +39,11 @@ export class ShopService {
 
     this.localStorageService.setItem('shops', shops);
   }
+
+  public deleteShop(shop: Shop): void {
+    let shops: Shop[] = this.localStorageService.getItem('shops');
+    shops = shops.filter(item => item.id !== shop.id);
+
+    this.localStorageService.setItem('shops', shops);
+  }
 }

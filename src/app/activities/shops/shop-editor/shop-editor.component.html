@@ -16,6 +16,17 @@
             (updateModel)="shop.description = $event">
   </bp-field>
 
+  <div class="bp-shop-editor__add-icon" (click)="_isAddIconDialogOpen = true" *ngIf="!shop.icon">
+    + Добавить иконку
+  </div>
+
+  <div class="bp-shop-editor__icon-selected" *ngIf="shop.icon">
+    <div class="bp-shop-editor__icon icon-shop {{shop.icon}}"></div>
+    <div class="bp-shop-editor__icon-change" (click)="_isAddIconDialogOpen = true">
+      Изменить иконку
+    </div>
+  </div>
+
 
   <div class="bp-shop-editor__map">
     <div class="bp-shop-editor__map-title">Расположение:</div>
@@ -29,8 +40,30 @@
   </div>
 
   <div class="bp-shop-editor__toolbar">
-    <bp-button [text]="actionTitle" (click)="_onSave()"></bp-button>
-    <bp-button [text]="'Отмена'" (click)="_onCancel()"></bp-button>
+    <div class="bp-shop-editor__toolbar-actions">
+      <div class="bp-shop-editor__toolbar-action _ok" (click)="_onSave()">ОК</div>
+      <div class="bp-shop-editor__toolbar-action _cancel" (click)="_onCancel()">Отмена</div>
+    </div>
   </div>
 
+</div>
+
+<div class="bp-shop-editor__dialog-wrapper" *ngIf="_isAddIconDialogOpen"> </div>
+
+<div class="bp-shop-editor__icon-list" *ngIf="_isAddIconDialogOpen">
+  <div class="bp-shop-editor__icon-list-header">
+    Добавить иконку
+    <div class="bp-shop-editor__icon-list-header-close" (click)="_isAddIconDialogOpen = false"></div>
+  </div>
+  <div class="bp-shop-editor__icon-list-content">
+    <div class="bp-shop-editor__icon-list-item" *ngFor="let icon of _icons"
+         [ngClass]="{'_selected': icon.clazz === shop.icon}"
+    (click)="_onIconSelected(icon.clazz)">
+      <div class="icon-shop {{icon.clazz}}"></div>
+      <div class="bp-shop-editor__icon-list-item-title">{{icon.title}}</div>
+    </div>
+  </div>
+  <div class="bp-shop-editor__icon-list-action" (click)="_isAddIconDialogOpen = false" >
+    OK
+  </div>
 </div>

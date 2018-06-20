@@ -3,5 +3,5 @@ export class Product{
   count: number;
   weight: number;
   price: number;
-  photos: any[];
+  photo: any;
 }

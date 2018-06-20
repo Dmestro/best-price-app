@@ -11,7 +11,6 @@ export class HeaderComponent implements OnInit {
   public _routes: any[] = [
     {title: 'Покупки', link: '/vauchers'},
     {title: 'Магазины', link: '/shops'},
-    {title: 'Чеки', link: '/receipts'},
     {title: 'О программе', link: '/about'},
 
   ];
@@ -20,8 +19,8 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit() {
   }
-  public _onRouteChange(route: {tile: string, link: string}): void{
-    this._title = route.tile;
+  public _onRouteChange(route: {title: string, link: string}): void{
+    this._title = route.title;
   }
 
 }

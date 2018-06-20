@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import { v4 as uuid } from 'uuid';
 import {LocalStorageServiceService} from '../../../common/services/local-storage-service.service';
 import {ShopService} from '../../../common/services/shop.service';
+import {ShopIconService} from '../../../common/services/shop-icon.service';
 
 @Component({
   selector: 'bp-shop-editor',
@@ -21,11 +22,17 @@ export class ShopEditorComponent implements OnInit {
 
   public lat: number = 53.203352; // 53.203352, 50.158921
   public lng: number = 50.158921;
+  _isAddIconDialogOpen: boolean = false;
+
+  public _icons: {clazz, title}[];
 
   constructor(private router: Router,
               private localStorageService: LocalStorageServiceService,
               private route: ActivatedRoute,
-              private shopsService: ShopService) {
+              private shopsService: ShopService,
+              private shopIconService: ShopIconService) {
+    this._icons = shopIconService.getIcons();
+
      this.shopId = this.route.snapshot.params['id'];
     if(this.shopId){
       this.title = 'Редактирование магазина';
@@ -66,4 +73,8 @@ export class ShopEditorComponent implements OnInit {
 
   }
 
+  _onIconSelected(clazz) {
+    this.shop.icon = clazz;
+    console.log('asas');
+  }
 }

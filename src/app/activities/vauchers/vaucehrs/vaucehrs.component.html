@@ -1,5 +1,12 @@
 <div class="bp-vauchers">
+    <div *ngFor="let vaucher of _vauchers"
+         class="bp-vaucher" routerLink="/change-vaucher/{{vaucher.id}}">
+        <div class="bp-vaucher__price">{{vaucher.totalPrice | number}}р.</div>
+        <div class="bp-vaucher__shop-name">{{vaucher.shop.name}}</div>
+        <div class="bp-vaucher__date">{{vaucher.date}}</div>
+      <div class="bp-vaucher__remove" (click)="_onRemoveVaucher(vaucher, $event) "></div>
 
+    </div>
 </div>
 
 <bp-action-button [text]="'Добавить чек'" routerLink="/create-vaucher">
